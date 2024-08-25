@@ -1,0 +1,23 @@
+<!-- popup.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sentiment Analyzer</title>
+    <style>
+        body { width: 300px; padding: 10px; }
+        button { margin: 5px; }
+        #result { margin-top: 10px; padding: 5px; border-radius: 3px; }
+        .positive { background-color: #e6ffe6; }
+        .negative { background-color: #ffe6e6; }
+        .neutral { background-color: #e6e6e6; }
+    </style>
+</head>
+<body>
+    <h2>Sentiment Analyzer</h2>
+    <button id="analyzeSelected">Analyze Selected Text</button>
+    <button id="analyzePage">Analyze Entire Page</button>
+    <div id="result"></div>
+    <script src="popup.js"></script>
+</body>
+</html>
