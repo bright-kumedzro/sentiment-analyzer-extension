@@ -25,14 +25,27 @@ function initializePopup() {
     highlightButton.addEventListener('click', handleHighlightClick);
 }
 
+// Inside popup.js
 function handleAnalyzeClick() {
     const text = textInput.value;
     if (text) {
-        analyzeSentiment(text);
+        chrome.runtime.sendMessage({action: "analyzeSentiment", text: text}, (response) => {
+            if (response.error) {
+                resultDiv.innerHTML = `<p style="color: red;">Error: ${response.error}</p>`;
+            } else {
+                currentSentiment = response.label;
+                resultDiv.innerHTML = `
+                    <h3>Sentiment Analysis Result</h3>
+                    <p>Label: ${response.label}</p>
+                    <p>Score: ${response.score.toFixed(4)}</p>
+                `;
+            }
+        });
     } else {
         alert("Please enter some text to analyze.");
     }
 }
+
 
 function handleSubmitFeedbackClick() {
     const feedback = feedbackText.value;
