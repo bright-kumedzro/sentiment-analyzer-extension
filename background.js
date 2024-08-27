@@ -1,38 +1,15 @@
-
-// function createContextMenu() {
-//     chrome.contextMenus.create({
-//         id: "analyzeSentiment",
-//         title: "Analyze Sentiment",
-//         contexts: ["selection"]
-//     });
-// }
-
-// chrome.runtime.onInstalled.addListener(createContextMenu);
-
-// chrome.contextMenus.onClicked.addListener((info, tab) => {
-//     if (info.menuItemId === "analyzeSentiment") {
-//         chrome.tabs.sendMessage(tab.id, {action: "test"});
-//     }
-// });
-
-
-// Browser compatibility
-if (typeof browser === "undefined") {
-    var browser = chrome;
-}
-
 // Constants
 const BACKEND_URL = 'https://sentiment-analyzer-extension.onrender.com';
 
 // Event listeners
-browser.runtime.onInstalled.addListener(createContextMenu);
-browser.contextMenus.onClicked.addListener(handleContextMenuClick);
-browser.runtime.onMessage.addListener(handleMessage);
-browser.commands.onCommand.addListener(handleCommand);
+chrome.runtime.onInstalled.addListener(createContextMenu);
+chrome.contextMenus.onClicked.addListener(handleContextMenuClick);
+chrome.runtime.onMessage.addListener(handleMessage);
+chrome.commands.onCommand.addListener(handleCommand);
 
 // Main functions
 function createContextMenu() {
-    browser.contextMenus.create({
+    chrome.contextMenus.create({
         id: "analyzeSentiment",
         title: "Analyze Sentiment",
         contexts: ["selection"]
@@ -41,7 +18,7 @@ function createContextMenu() {
 
 function handleContextMenuClick(info, tab) {
     if (info.menuItemId === "analyzeSentiment") {
-        browser.tabs.sendMessage(tab.id, {action: "analyzeSentiment"});
+        chrome.tabs.sendMessage(tab.id, {action: "analyzeSentiment"});
     }
 }
 
@@ -58,8 +35,8 @@ function handleMessage(request, sender, sendResponse) {
 
 function handleCommand(command) {
     if (command === "analyze_sentiment") {
-        browser.tabs.query({active: true, currentWindow: true}, (tabs) => {
-            browser.tabs.sendMessage(tabs[0].id, {action: "analyzeSentiment"});
+        chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+            chrome.tabs.sendMessage(tabs[0].id, {action: "analyzeSentiment"});
         });
     }
 }
@@ -73,7 +50,12 @@ function analyzeSentiment(text, sendResponse) {
         },
         body: JSON.stringify({text: text}),
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
     .then(data => sendResponse(data))
     .catch(error => sendResponse({error: error.message}));
 }
