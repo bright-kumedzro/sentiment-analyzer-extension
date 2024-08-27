@@ -18,7 +18,7 @@ function createContextMenu() {
 
 function handleContextMenuClick(info, tab) {
     if (info.menuItemId === "analyzeSentiment") {
-        chrome.tabs.sendMessage(tab.id, {action: "analyzeSentiment"});
+        chrome.tabs.sendMessage(tab.id, {action: "analyzeSelectedText"});
     }
 }
 
@@ -30,13 +30,16 @@ function handleMessage(request, sender, sendResponse) {
         case "submitFeedback":
             handleFeedbackSubmission(request.feedback, sendResponse);
             return true;
+        default:
+            sendResponse({error: "Unknown action"});
+            return true;
     }
 }
 
 function handleCommand(command) {
     if (command === "analyze_sentiment") {
         chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-            chrome.tabs.sendMessage(tabs[0].id, {action: "analyzeSentiment"});
+            chrome.tabs.sendMessage(tabs[0].id, {action: "analyzePage"});
         });
     }
 }
