@@ -1,0 +1,45 @@
+<!-- settings.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sentiment Analyzer Settings</title>
+</head>
+<body>
+    <h2>Settings</h2>
+    <label for="backendUrl">Backend URL:</label>
+    <input type="text" id="backendUrl" />
+    <button id="saveSettings">Save</button>
+    <script src="settings.js"></script>
+</body>
+</html> -->
+
+
+
+
+
+
+<!-- settings.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sentiment Analyzer Settings</title>
+    <style>
+        body { width: 300px; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Settings</h2>
+    <label>
+        <input type="checkbox" id="autoAnalyze"> Auto-analyze on text selection
+    </label>
+    <br><br>
+    <label>
+        Minimum text length for analysis:
+        <input type="number" id="minLength" min="1" max="1000">
+    </label>
+    <br><br>
+    <button id="saveButton">Save Settings</button>
+    <p id="status"></p>
+    <script src="settings.js"></script>
+</body>
+</html>
