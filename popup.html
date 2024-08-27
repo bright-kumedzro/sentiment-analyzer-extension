@@ -1,0 +1,64 @@
+<!-- popup.html
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sentiment Analyzer</title>
+    <style>
+        body { width: 300px; padding: 10px; }
+        button { margin: 5px; }
+        #result { margin-top: 10px; padding: 5px; border-radius: 3px; }
+        .positive { background-color: #e6ffe6; }
+        .negative { background-color: #ffe6e6; }
+        .neutral { background-color: #e6e6e6; }
+    </style>
+</head>
+<body>
+    <h2>Sentiment Analyzer</h2>
+    <button id="analyzeSelected">Analyze Selected Text</button>
+    <button id="analyzePage">Analyze Entire Page</button>
+    <div id="result"></div>
+    <script src="popup.js"></script>
+</body>
+</html> -->
+
+
+
+
+<!-- popup.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sentiment Analyzer</title>
+    <style>
+        body { width: 300px; padding: 10px; }
+        textarea { width: 100%; height: 100px; }
+        #result { margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Sentiment Analyzer</h2>
+    <textarea id="textInput" placeholder="Enter text to analyze..."></textarea>
+    <button id="highlightButton">Highlight Page Sentiment</button>
+    <button id="analyzeButton">Analyze</button>
+    <div id="result"></div>
+
+    <div id="feedback">
+        <h3>Feedback</h3>
+        <textarea id="feedbackText" placeholder="Leave your feedback here..."></textarea>
+        <button id="submitFeedback">Submit Feedback</button>
+    </div>
+
+    <div id="feedbackForm" style="display:none;">
+    <h3>Feedback</h3>
+    <textarea id="feedbackText" placeholder="Leave your feedback here..."></textarea>
+    <p>Accuracy: <input type="range" id="accuracySlider" min="0" max="100" value="50"></p>
+    <button id="submitFeedback">Submit Feedback</button>
+    </div>
+
+
+
+
+    <script src="popup.js"></script>
+</body>
+</html>
