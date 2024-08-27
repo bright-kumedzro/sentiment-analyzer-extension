@@ -57,7 +57,14 @@ let selectedText = '';
 document.addEventListener('mouseup', handleTextSelection);
 
 // Message listener
-browser.runtime.onMessage.addListener(handleMessage);
+// content.js
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.action === "analyzeSelectedText") {
+        // Your logic to analyze the selected text
+    } else if (request.action === "analyzePage") {
+        // Your logic to analyze the entire page
+    }
+});
 
 // Main functions
 function handleTextSelection() {
@@ -84,7 +91,7 @@ function handleAnalyzeSentiment() {
 }
 
 function analyzeSentiment(text) {
-    browser.runtime.sendMessage({action: "analyzeSentiment", text: text}, (response) => {
+   chrome.browser.runtime.sendMessage({action: "analyzeSentiment", text: text}, (response) => {
         if (response.error) {
             alert(`Error: ${response.error}`);
         } else {
