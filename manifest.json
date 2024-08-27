@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Sentiment Analyzer",
+  "name": "Sentiment Analyzer Extension",
   "version": "1.0",
   "description": "Analyzes the sentiment of selected text or entire web pages.",
   "permissions": [
@@ -9,9 +9,8 @@
     "storage"
   ],
   "host_permissions": [
-    "https://your-render-app-name.onrender.com/",
+    "https://sentiment-analyzer-extension.onrender.com/",
     "http://localhost:5000/"
-    "http://127.0.0.1:5000"
   ],
   "background": {
     "service_worker": "background.js"
@@ -25,17 +24,11 @@
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "images/icon16.png",
-      "32": "images/icon32.png",
-      "48": "images/icon48.png",
-      "128": "images/icon128.png"
+      "16": "icon16.png"
     }
   },
   "icons": {
-    "16": "images/icon16.png",
-    "32": "images/icon32.png",
-    "48": "images/icon48.png",
-    "128": "images/icon128.png"
+    "16": "icon16.png"
   },
   "commands": {
     "_execute_action": {
@@ -53,10 +46,6 @@
       "description": "Analyze sentiment of selected text"
     }
   },
-  "options_page": "settings.html",
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "sentiment-analyzer@example.com"
-    }
-  }
+  "options_page": "settings.html"
+  
 }
